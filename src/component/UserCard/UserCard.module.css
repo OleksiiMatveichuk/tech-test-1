@@ -1,0 +1,91 @@
+
+.card {
+    position: relative;
+    width: 380px;
+    min-height: 460px;
+    border-radius: 20px;
+    background: var(--background);
+    padding: 36px;
+    padding-top: 28px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.firstImg {
+    width: 308px;
+}
+
+.line {
+    position: absolute;
+    top: 214px;
+    left: 0;
+    right: 0;
+
+    height: 8px;
+    background: var(--lightColor);
+    box-shadow: var(--lineShadow);
+}
+
+.userPhoto{
+    width: 80px;
+    z-index: 1;
+
+    position: absolute;
+    top: 184px;
+}
+
+.infoBlock {
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 20px;
+    color: var(--lightColor);
+    
+    
+}
+
+.textTweet {
+    margin-bottom: 16px;
+}
+
+.textFollowers {
+    margin-bottom: 26px;
+}
+
+.btnFollow{
+    min-width: 196px;
+    min-height: 50px;
+    padding: 14px 28px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background-color: var(--lightColor);
+
+    text-transform: uppercase;
+    color: var(--textColor);
+    font-weight: 600;
+    font-size: 18px; 
+    transition: 250ms;
+}
+
+.btnFollow:hover,
+.btnFollow:focus{
+    background-color: var(--seondaryBtn);
+}
+
+.btnFollowing {
+    composes: btnFollow;
+    background-color: var(--seondaryBtn);
+}
+
+.btnFollowing:hover,
+.btnFollowing:focus {
+    background-color: var(--lightColor);
+}
