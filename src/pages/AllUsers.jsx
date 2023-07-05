@@ -11,8 +11,6 @@ const AllUsers = () => {
 
   const dispatch = useDispatch();
   const users = useSelector(selectUsers);
-  console.log("users", users);
-  console.log("page", page);
 
   useEffect(() => {
     dispatch(getUsers(page));

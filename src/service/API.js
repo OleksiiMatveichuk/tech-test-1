@@ -13,7 +13,6 @@ export const getUsers = createAsyncThunk(
           limit: 3,
         },
       });
-      console.log("data", data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -26,7 +25,6 @@ export const putUsersById = createAsyncThunk(
   async (user, { rejectWithValue }) => {
     try {
       const { data } = await axios.put(`users/${user.id}`, { ...user });
-      console.log("data", data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
