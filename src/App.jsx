@@ -1,37 +1,23 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { Suspense, lazy } from "react";
 import "./App.css";
-import { UserCard } from "./component/UserCard/UserCard";
+import { Layout } from "./component/Layout/Layout";
+import { Navigate, Route, Routes } from "react-router-dom";
 
-function App() {
-  // const [count, setCount] = useState(0);
+const AllUsers = lazy(() => import("./pages/AllUsers"));
+const Strangers = lazy(() => import("./pages/Strangers"));
+const Friends = lazy(() => import("./pages/MyFriends"));
 
+export const App = () => {
   return (
-    <>
-      {/* <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>vite + react</h1> */}
-      <UserCard />
-      {/* <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p> */}
-    </>
+    <Suspense fallback={<p>Load...</p>}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<AllUsers />} />
+          <Route path="/people" element={<Strangers />} />
+          <Route path="/friends" element={<Friends />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
-}
-
-export default App;
+};

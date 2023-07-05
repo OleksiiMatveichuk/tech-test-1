@@ -1,0 +1,26 @@
+.userList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.btnLoad {
+    min-width: 196px;
+    min-height: 50px;
+    padding: 14px 28px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background-color: var(--lightColor);
+
+    text-transform: uppercase;
+    color: var(--textColor);
+    font-weight: 600;
+    font-size: 18px;
+    transition: 250ms;
+
+    margin-top: 30px;
+}
+
+.btnLoad:hover {
+    background-color: var(--seondaryBtn);
+}

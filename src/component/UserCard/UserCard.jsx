@@ -1,14 +1,23 @@
 import css from "./UserCard.module.css";
 import logo from "../../images/logo.svg";
 import bgImg from "../../images/pictureToUserCard2x.png";
-import photoImg from "../../images/boy2x.png";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectSubscribe } from "../../redux/seletors";
+import { following, unFollowing } from "../../redux/slice";
+import { putUsersById } from "../../service/API";
 
-export const UserCard = () => {
-  const [subscription, setSubscription] = useState(false);
+export const UserCard = ({ user }) => {
+  const subscription = useSelector(selectSubscribe);
+  const dispatch = useDispatch();
 
-  const handleClick = () => {
-    subscription ? setSubscription(false) : setSubscription(true);
+  const handleClick = (el) => {
+    if (subscription.includes(el.id)) {
+      dispatch(unFollowing(el.id));
+      dispatch(putUsersById({ ...el, followers: el.followers - 1 }));
+    } else {
+      dispatch(following(el.id));
+      dispatch(putUsersById({ ...el, followers: el.followers + 1 }));
+    }
   };
 
   return (
@@ -16,16 +25,18 @@ export const UserCard = () => {
       <img className={css.logo} src={logo} alt="logo" />
       <img className={css.firstImg} src={bgImg} alt="background image" />
       <span className={css.line}></span>
-      <img className={css.userPhoto} src={photoImg} alt="user photo" />
+      <img className={css.userPhoto} src={user.avatar} alt="user photo" />
       <div className={css.infoBlock}>
-        <p className={css.textTweet}>777 Tweets</p>
-        <p className={css.textFollowers}>100500 Followers</p>
+        <p className={css.textTweet}>{user.tweets} Tweets</p>
+        <p className={css.textFollowers}>{user.followers} Followers</p>
         <button
-          className={!subscription ? css.btnFollow : css.btnFollowing}
-          onClick={handleClick}
+          className={
+            !subscription.includes(user.id) ? css.btnFollow : css.btnFollowing
+          }
+          onClick={() => handleClick(user)}
           type="button"
         >
-          {!subscription ? "Follow" : "Following"}
+          {!subscription.includes(user.id) ? "Follow" : "Following"}
         </button>
       </div>
     </div>
